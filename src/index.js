@@ -5,4 +5,4 @@ function App () {
   return <p>Hello from React</p>
 }
 
-ReactDOM.render(<App />, document.body);
+ReactDOM.render(<App />, document.getElementById("bookshelf"));
