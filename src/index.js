@@ -7,6 +7,7 @@ import * as Storage from "./utils/storage";
 import makeUidTracker from "./utils/uid";
 
 import Book from "./components/Book";
+import Form from "./components/Form";
 
 class App extends React.Component {
   constructor () {
@@ -37,6 +38,7 @@ class App extends React.Component {
 
     this.changeRead = this.changeRead.bind(this);
     this.removeBook = this.removeBook.bind(this);
+    this.addBook = this.addBook.bind(this);
   }
 
   storeLibrary (library) {
@@ -77,10 +79,32 @@ class App extends React.Component {
     });
   }
 
+  addBook (book = null) {
+    if (book) {
+      book.id = this.uidTracker.getID();
+
+      this.setState(state => {
+
+        const books = state.library.concat(book);
+
+        this.storeLibrary(books);
+
+        return {
+          ...state,
+          library: books,
+          shouldShowForm: false,
+        };
+      });
+    } else {
+      this.setState({shouldShowForm: false});
+    }
+  }
+
   render () {
     const Books = this.state.library.map( book => <Book key={book.id} data={book} callbacks={{changeRead: this.changeRead, removeBook: this.removeBook}} /> );
     return (
       <div>
+        { this.state.shouldShowForm ? <Form callback={this.addBook} /> : false }
         <div className="button-container">
           <button type="button" className="topside-flat" onClick={() => this.setState({shouldShowForm: true})}>Add Book</button>
         </div>

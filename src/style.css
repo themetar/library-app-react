@@ -200,8 +200,10 @@ button:active {
   Modal window for Add Book form
   */
 
-#book-form {
+.form-container {
   position: fixed;
+  left: 0;
+  top: 0;
   display: block;
   width: 100vw;
   height: 100vh;
@@ -213,7 +215,7 @@ button:active {
   background-color: rgba(0, 0, 0, .4);
 }
 
-#book-form form {
+.form-container form {
   max-width: 600px;
 
   padding: 20px;
@@ -254,12 +256,7 @@ form .error {
   background-color: rgba(127, 0, 0, .6);
   color: white;
   box-shadow: .3em .3em .5em rgba(0, 0, 0, .4);
-  display: none;
 }
-
-form .error.show { display: block; }
-
-#book-form.closed { display: none; }
 
 @media screen and (max-width: 599px) {
   #book-form form {
