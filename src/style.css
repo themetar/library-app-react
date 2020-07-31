@@ -49,6 +49,10 @@ body {
 
 /* Header */
 
+header {
+  border-bottom: 2px solid #4e8098;
+}
+
 h1 { background: #fcf7f8; }
 
 h1 {
@@ -63,13 +67,15 @@ h1 {
 
 .button-container {  /* button container div */
   padding-left: 10%;
-  border-top: 2px solid #4e8098;
 }
 
 .button-container button {
   font-size: 1.2rem;
   background: linear-gradient(#4e8098, #90c2e7);
   color: #fcf7f8;
+  border-top-width: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 @media screen and (max-width: 799px) {
@@ -81,6 +87,19 @@ h1 {
   h1 {
     padding-top: .2em;
     padding-bottom: .4em;
+  }
+
+  .button-container {
+    position: fixed;
+    padding-left: 0;
+    top: 6rem;
+  }
+
+  .button-container button {
+    border-top-width: 2px;
+    border-left-width: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 4px;
   }
 }
 
@@ -190,12 +209,6 @@ button:active {
   color: #90c2e7;
 }
 
-.topside-flat {
-  border-top: none;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
 /*
   Modal window for Add Book form
   */
@@ -264,8 +277,6 @@ form .error {
     max-width: none;
   }
 }
-
-body.with-modal { overflow-y: hidden; }
 
 /* Footer */
 

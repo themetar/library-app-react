@@ -106,7 +106,7 @@ class App extends React.Component {
       <div>
         { this.state.shouldShowForm ? <Form callback={this.addBook} /> : false }
         <div className="button-container">
-          <button type="button" className="topside-flat" onClick={() => this.setState({shouldShowForm: true})}>Add Book</button>
+          <button type="button" onClick={() => this.setState({shouldShowForm: true})}>Add Book</button>
         </div>
         <div id="bookshelf">
           {
