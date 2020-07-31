@@ -61,12 +61,12 @@ h1 {
   font-family: 'Dancing Script', cursive;
 }
 
-header > div {  /* button container div */
+.button-container {  /* button container div */
   padding-left: 10%;
   border-top: 2px solid #4e8098;
 }
 
-header button {
+.button-container button {
   font-size: 1.2rem;
   background: linear-gradient(#4e8098, #90c2e7);
   color: #fcf7f8;
