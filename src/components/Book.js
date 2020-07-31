@@ -4,6 +4,13 @@ function Book (props) {
   const book = props.data;
   const callbacks = props.callbacks;
 
+  function handleBtnClick () {
+    let r = confirm("Remove " + book.title + " from library? Are you sure?");
+    if (r) {
+      callbacks.removeBook(book.id)
+    }
+  }
+
   return (
     <div className="book">
       <div className="cover">
@@ -14,7 +21,7 @@ function Book (props) {
               onChange={() => callbacks.changeRead(book.id)}
       />
       <label htmlFor={`read-${book.id}`}>read</label>
-      <button>remove</button>
+      <button onClick={handleBtnClick}>remove</button>
     </div>
   );
 }

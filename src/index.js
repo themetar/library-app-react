@@ -35,6 +35,7 @@ class App extends React.Component {
     };
 
     this.changeRead = this.changeRead.bind(this);
+    this.removeBook = this.removeBook.bind(this);
   }
 
   storeLibrary (library) {
@@ -58,15 +59,32 @@ class App extends React.Component {
       });
   
       this.storeLibrary(books);
-      
+
+      return ({...prevState, library: books});
+    });
+  }
+
+  removeBook (id) {
+    this.setState(prevState => {
+      const books = prevState.library.filter(book => book.id != id);
+
+      this.uidTracker.freeID(id)
+  
+      this.storeLibrary(books);
+
       return ({...prevState, library: books});
     });
   }
 
   render () {
+    const Books = this.state.library.map( book => <Book key={book.id} data={book} callbacks={{changeRead: this.changeRead, removeBook: this.removeBook}} /> );
     return (
       <div>
-        {this.state.library.map( book => <Book key={book.id} data={book} callbacks={{changeRead: this.changeRead}} /> )}
+        {
+          Books.length > 0 ?
+          Books :
+          <p>No books in the Library</p>
+        }
       </div>
     );
   }
