@@ -1,5 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: "./src/index.js",
@@ -7,6 +10,14 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "build"),
   },
+  optimization: {
+    minimizer: [
+      new TerserJSPlugin({
+        extractComments: false,
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+  },  
   module: {
     rules: [
       {
@@ -19,7 +30,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -27,6 +38,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
+    new MiniCssExtractPlugin(),
   ],
   devServer: {
     contentBase: "./build",
