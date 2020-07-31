@@ -33,12 +33,40 @@ class App extends React.Component {
     this.state = {
       library: books,
     };
+
+    this.changeRead = this.changeRead.bind(this);
+  }
+
+  storeLibrary (library) {
+    const books = library.map(book => {
+      const book_copy = {...book};
+      delete book_copy.id;
+      return book_copy;
+    });
+    
+    Storage.storeItem("library", books);
+  }
+
+  changeRead (id) {
+    this.setState(prevState => {
+      const books = prevState.library.map(book => {
+        if (book.id == id) {
+          return {...book, read: !book.read};
+        }
+        // else
+        return book;
+      });
+  
+      this.storeLibrary(books);
+      
+      return ({...prevState, library: books});
+    });
   }
 
   render () {
     return (
       <div>
-        {this.state.library.map( book => <Book key={book.id} data={book} /> )}
+        {this.state.library.map( book => <Book key={book.id} data={book} callbacks={{changeRead: this.changeRead}} /> )}
       </div>
     );
   }
