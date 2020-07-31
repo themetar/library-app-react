@@ -32,6 +32,7 @@ class App extends React.Component {
     
     this.state = {
       library: books,
+      shouldShowForm: false,
     };
 
     this.changeRead = this.changeRead.bind(this);
@@ -79,12 +80,17 @@ class App extends React.Component {
   render () {
     const Books = this.state.library.map( book => <Book key={book.id} data={book} callbacks={{changeRead: this.changeRead, removeBook: this.removeBook}} /> );
     return (
-      <div id="bookshelf">
-        {
-          Books.length > 0 ?
-          Books :
-          <p>No books in the Library</p>
-        }
+      <div>
+        <div className="button-container">
+          <button type="button" className="topside-flat" onClick={() => this.setState({shouldShowForm: true})}>Add Book</button>
+        </div>
+        <div id="bookshelf">
+          {
+            Books.length > 0 ?
+            Books :
+            <p>No books in the Library</p>
+          }
+        </div>
       </div>
     );
   }
