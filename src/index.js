@@ -79,7 +79,7 @@ class App extends React.Component {
   render () {
     const Books = this.state.library.map( book => <Book key={book.id} data={book} callbacks={{changeRead: this.changeRead, removeBook: this.removeBook}} /> );
     return (
-      <div>
+      <div id="bookshelf">
         {
           Books.length > 0 ?
           Books :
@@ -90,4 +90,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("bookshelf"));
+ReactDOM.render(<App />, document.getElementById("app"));
